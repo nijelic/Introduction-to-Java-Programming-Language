@@ -1,0 +1,10 @@
+1	The Beatles	https://www.youtube.com/watch?v=A_MjCqQoLLA
+2	Queen	https://www.youtube.com/watch?v=ktYlzVYQbwY
+3	BOB DYLAN	https://www.youtube.com/watch?v=PYF8Y47qZQY
+4	Johnny Cash	https://www.youtube.com/watch?v=QfCOJLRk2D4
+5	Vivaldi	https://www.youtube.com/watch?v=GRxofEmo3HA&t=903s
+6	Nina Simone	https://www.youtube.com/watch?v=xbIG_b2IMO0
+7	Stevie Wonder	https://www.youtube.com/watch?v=0CFuCYNx-1g
+8	Bobby McFerrin	https://www.youtube.com/watch?v=d-diB65scQU
+9	Earth, Wind & Fire	https://www.youtube.com/watch?v=god7hAPv8f0
+10	Louis Prima	https://www.youtube.com/watch?v=Kkrb4h4weW4

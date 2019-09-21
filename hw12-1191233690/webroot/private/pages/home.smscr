@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+ <head>
+
+ <style>
+ body {background-color: #{$="background" "0" @tparamGet $};}
+ </style>
+ </head>
+ <body></br>
+</br><a href="http://www.localhost.com:5721/scripts/osnovni.smscr">osnovni.smscr</a>
+</br><a href="http://www.localhost.com:5721/scripts/brojPoziva.smscr">brojPoziva.smscr</a>
+</br><a href="http://www.localhost.com:5721/scripts/fibonaccih.smscr">fibonaccih.smscr</a>
+</br><a href="http://www.localhost.com:5721/hello">HelloWorker</a>
+</br><a href="http://www.localhost.com:5721/cw">CircleWorker</a>
+</br>
+<form action="http://www.localhost.com:5721/scripts/zbrajanje.smscr" method="get" target="_blank">
+  Number a: <input type="text" name="a"><br>
+  Number b: <input type="text" name="b"><br>
+  <input type="submit" value="Submit">
+</form>
+</br>
+<form action="http://www.localhost.com:5721/setbgcolor" method="get" target="_blank">
+  <select name="bgcolor">
+  <option value="FF0000">Red</option>
+  <option value="00FF00">Green</option>
+  <option value="0000FF">Blue</option>
+  <option value="FFFFFF">White</option>
+  <option value="FF00FF">Purple</option>
+  </select>
+  </br><input type="submit" value="Submit">
+</form>
+ </body>
+</html>

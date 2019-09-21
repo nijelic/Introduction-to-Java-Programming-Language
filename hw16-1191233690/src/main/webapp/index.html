@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gallery</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/htmlescaping.js"></script>
+<link rel="stylesheet" href="myCSS.css" />
+</head>
+<body>
+	
+	<h1>Gallery</h1>
+
+	<div id="base"></div>
+	<br>
+	<span id="smallImgs"></span>
+	<br>
+	<div id="selectedImg"></div>
+	<script type="text/javascript">
+	
+		$(document).ready(askForTags());
+		
+		
+		function askForTags() {
+			let xmlhttp;
+
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			<!-- Getting tags for buttons -->
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					let text = xmlhttp.responseText;
+					let tags = JSON.parse(text);
+					console.log(text);
+					let html = "";
+					for (let i = 0; i < tags.length; i++) {
+						if (i > 0 && i < tags.length)
+							html += "&nbsp;";
+						html += "<input type='button' class='btn' value='"
+								+ tags[i]
+								+ "' onclick=\"btnClick('"
+								+ tags[i]
+								+ "')\">&nbsp;";
+					}
+					document.getElementById("base").innerHTML = html;
+				}
+			}
+			xmlhttp.open("GET", "rest/tags", true);
+			xmlhttp.send();
+
+		}
+
+		
+		function btnClick(tag) {
+			let xmlhttp;
+
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			<!-- Creates images when tag button is clicked -->
+			xmlhttp.onreadystatechange = function() {
+				
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					let text = xmlhttp.responseText;
+					var images = JSON.parse(text);
+					let html = "";
+					var div = document.getElementById("smallImgs");
+					while (div.firstChild) {
+					    div.removeChild(div.firstChild);
+					}
+					console.log(images);
+					for (let i = 0; i < images.length; i++) {
+						var img = document.createElement("IMG");
+						img.setAttribute("src", "servlets/image/" + images[i]);
+						img.setAttribute("name", images[i]);
+						img.setAttribute("onclick", "imgClick('"+img.getAttribute("name")+"')");
+						img.setAttribute("class", "smallImage");
+						div.appendChild(img);
+						
+					}
+
+				}
+			}
+			xmlhttp.open("GET", "rest/tags/" + tag, true);
+			xmlhttp.send();
+		}
+		
+		
+		
+		function imgClick(name) {
+			let xmlhttp;
+			console.log(name);
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			<!-- Creates big image when small image is clicked -->
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4
+						&& xmlhttp.status == 200) {
+					let selectedImg = document.getElementById("selectedImg");
+					while (selectedImg.firstChild) {
+						selectedImg.removeChild(selectedImg.firstChild);
+					}
+					let image = document.createElement("IMG");
+					image.setAttribute("src", "servlets/normalImage?name="+name);
+					selectedImg.appendChild(image);
+					
+					let text = xmlhttp.responseText;
+					let info = JSON.parse(text);
+					console.log(text);
+					let html = "";
+					if(info.length !== 2) {
+						return;
+					}
+					
+					let h = document.createElement("h3");
+					let t = document.createTextNode(info[0]);
+					h.appendChild(t);
+					selectedImg.appendChild(h);
+					
+					let p = document.createElement("p");
+					information = "Tags: " + info[1];
+					t = document.createTextNode(information);
+					p.appendChild(t);
+					selectedImg.appendChild(p);
+				}
+			}
+			xmlhttp.open("GET", "rest/tags/img/" + name,true);
+			xmlhttp.send();
+		};
+	</script>
+</body>
+</html>
