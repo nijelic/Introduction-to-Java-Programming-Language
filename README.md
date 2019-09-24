@@ -1,1 +1,1 @@
-This repository contains code for each homework and text of homework in pdf format.
+This repository contains folders with the solution and the text of the assignment in pdf format. Also, a folder can contain attachments if any were given.
